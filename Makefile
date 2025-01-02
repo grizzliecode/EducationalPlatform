@@ -17,6 +17,7 @@ $(VENV_DIR)/bin/activate:
 
 # Install requirements
 install: install-wheel
+	make -C Evaluator
 
 
 # Build the Python wheel
@@ -35,7 +36,8 @@ install-wheel: build-wheel
 # Run tests using the virtual environment's Python interpreter
 test: $(VENV_DIR)/bin/activate
 	@echo "Running tests using the virtual environment..."
-	find tests -type f -name "*.py" -exec $(VENV_DIR)/bin/python {} +
+#	find tests -type f -name "*.py" -exec $(VENV_DIR)/bin/python {} +
+	$(VENV_DIR)/bin/python -m unittest discover -s tests -p "*.py"
 	@echo "All tests completed."
 
 # Clean up virtual environment and build artifacts

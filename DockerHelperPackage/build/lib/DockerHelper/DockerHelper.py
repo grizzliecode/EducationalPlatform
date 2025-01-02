@@ -38,8 +38,8 @@ class DockerHelper:
             exit_code, output =container.exec_run(cmd=command, stderr=False,stdout=True, detach=True)
             print(output)
             return exit_code
-        except (docker.errors.APIError,docker.errors.NotFound):
-            raise DockerHelperException("Container with the id provided was not found or there was an error communicating with the docker daemon.")
+        except (docker.errors.APIError,docker.errors.NotFound) as e:
+            raise DockerHelperException(f"Container with the id provided was not found or there was an error communicating with the docker daemon.{e}" )
     
     def coppyToContainer(self,containerId, data_string, container_path, file_name):
         try:
@@ -52,8 +52,8 @@ class DockerHelper:
                 tar.addfile(tarinfo, io.BytesIO(data_string.encode('utf-8')))
             tar_stream.seek(0)
             container.put_archive(container_path, tar_stream)
-        except (docker.errors.APIError,docker.errors.NotFound):
-            raise DockerHelperException("Container with the id provided was not found or there was an error communicating with the docker daemon.")
+        except (docker.errors.APIError,docker.errors.NotFound) as e:
+            raise DockerHelperException(f"Container with the id provided was not found or there was an error communicating with the docker daemon.{e}" )
         
     def coppyFromContainer(self,containerId, container_path):
         try:
@@ -72,5 +72,5 @@ class DockerHelper:
                     return file_content
                 else:
                     raise DockerHelperException(f"No file found at {container_path} in container {containerId}")
-        except (docker.errors.APIError,docker.errors.NotFound):
-            raise DockerHelperException("Container with the id provided was not found or there was an error communicating with the docker daemon.")
+        except (docker.errors.APIError,docker.errors.NotFound) as e:
+            raise DockerHelperException(f"Container with the id provided was not found or there was an error communicating with the docker daemon.{e}" )
