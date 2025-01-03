@@ -90,8 +90,8 @@ if __name__ == "__main__":
                 clues = "Accepted"
             else:
                 clues = "Wrong Answer"
-            with open(CLUES_OUTPUT, "w") as fout:
-                fout.write(clues)
+        with open(CLUES_OUTPUT, "w") as fout:
+            fout.write(clues)
             
     except Exception as e:
         with open(CLUES_OUTPUT, "w") as fout:

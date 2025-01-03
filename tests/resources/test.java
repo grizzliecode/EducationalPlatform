@@ -5,7 +5,7 @@ public class CumulativeSum {
     public static void main(String[] args) {
         // Path to the input and output files
         String inputFile = "input.txt";
-        String outputFile = "output.txt";
+        String outputFile = "result.txt";
 
         try {
             // Create a Scanner to read from the file

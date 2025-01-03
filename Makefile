@@ -21,7 +21,6 @@ install: install-wheel
 
 
 # Build the Python wheel
-# Build the Python wheel
 build-wheel: $(VENV_DIR)/bin/activate
 	cd DockerHelperPackage && ../$(VENV_DIR)/bin/python setup.py bdist_wheel 
 	cd ..
@@ -48,7 +47,7 @@ clean:
 	rm -rf DockerHelperPackage/build
 	rm -rf DockerHelperPackage/DockerHelperPackage.egg-info
 	@echo "Build artifacts removed."
-	find $(PACKAGE_DIR) -type d -name "__pycache__" -exec rm -rf {} + 
+	find . -type d -name "__pycache__" -exec rm -rf {} + 
 
 # Usage help
 help:
