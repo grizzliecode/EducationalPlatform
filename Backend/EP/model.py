@@ -60,7 +60,7 @@ class StudentAssignmentSubmission(Base):
     __tablename__ = 'student_assignment_submission'
     student_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
     class_id = Column(Integer, ForeignKey("classroom.id"), primary_key=True)
-    assignment_id = Column(Integer, ForeignKey("assignments.assignment_id"))
+    assignment_id = Column(Integer, ForeignKey("assignments.assignment_id"), primary_key=True)
     response_file = Column(String, nullable=False)
     grade = Column(Float)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
@@ -74,7 +74,7 @@ class StudentCodeSubmission(Base):
     __tablename__ = 'student_code_submission'
     student_id = Column(Integer, ForeignKey("users.id"), primary_key=True)
     class_id = Column(Integer, ForeignKey("classroom.id"), primary_key=True)
-    test_id = Column(Integer, ForeignKey("coding_test.test_id"))
+    test_id = Column(Integer, ForeignKey("coding_test.test_id"), primary_key=True)
     code_file = Column(String, nullable=False)
     mark = Column(Integer)
     student = relationship("User", backref="code_submissions")

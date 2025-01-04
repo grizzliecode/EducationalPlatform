@@ -15,3 +15,6 @@ def get_string_from_file(path):
     except Exception as e:
         print(f"An error occurred while reading the string: {e}")
         return None
+
+import os
+STORAGE = os.path.abspath("/home/octavian/Desktop/EducationalPlatformEnv/EducationalPlatform/storage")

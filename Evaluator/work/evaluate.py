@@ -60,7 +60,7 @@ if __name__ == "__main__":
         if args.language == "python":
             command = ["python", args.source]
             p = subprocess.Popen(command, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-            _, err = p.communicate()
+            _, err = p.communicate(timeout=2)
             if len(err) > 0:
                 logging.info(f"runtime errors {err} {65}")
                 raise Exception("")
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         elif args.language == "java":
             command = ["./runJava.sh", args.source]
             p = subprocess.Popen(command, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-            _, err = p.communicate()
+            _, err = p.communicate(timeout=2)
             if len(err) > 0:
                 logging.info(f"runtime errors {err} {76}")
                 raise Exception("")
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         elif args.language == "c/c++":
             command = ["./runC.sh", args.source]
             p = subprocess.Popen(command, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-            ot, err = p.communicate()
+            ot, err = p.communicate(timeout=2)
             if isError(str(err, 'utf-8')):
                 logging.info(f"runtime errors {err} {87}")
                 raise Exception("")

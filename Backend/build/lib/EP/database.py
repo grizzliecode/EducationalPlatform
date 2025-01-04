@@ -1,14 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
 import os
+from . import model
 
-# Load environment variables
-load_dotenv()
+
 
 DATABASE_URL = (
-    f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}"
-    f"@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}"
+   "postgresql://postgres:gado2211@localhost:5432/educational_platform"
 )
 
 engine = create_engine(DATABASE_URL)
@@ -25,3 +23,18 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def isAdmin(user_id):
+    db = get_db()
+    user = db.query(model.User).filter(model.User.id == user_id).filter(model.User.global_admin == True).first()
+    if user is None:
+        return False
+    return True
+
+def isTeacher(user_id):
+    db = get_db()
+    user = db.query(model.User).filter(model.User.id == user_id).filter(model.User.teacher == True).first()
+    if user is None:
+        return False
+    return True
