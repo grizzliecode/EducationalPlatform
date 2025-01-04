@@ -2,3 +2,12 @@ docker
 setuptools
 wheel
 build
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+psycopg2
+pydantic
+python-dotenv
+pyjwt
+python-multipart

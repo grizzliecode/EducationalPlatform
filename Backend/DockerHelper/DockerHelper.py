@@ -26,9 +26,9 @@ class DockerHelper:
         try:
             container = self.client.containers.get(container_id=containerId)
             if force == False:
-                container.stop()
+                container.remove()
             else:
-                container.stop(timeout=0)
+                container.remove(force = force)
         except (docker.errors.APIError,docker.errors.NotFound):
             raise DockerHelperException("Container with the id provided was not found or there was an error communicating with the docker daemon.")
     

@@ -5,8 +5,8 @@
 VENV_DIR = venv
 PYTHON = python3
 REQUIREMENTS = requirements.txt
-DIST_DIR = DockerHelperPackage/dist
-PACKAGE_DIR = DockerHelperPackage  # Replace this with your package name
+DIST_DIR = Backend/dist
+PACKAGE_DIR = Backend  # Replace this with your package name
 
 # Create the virtual environment
 $(VENV_DIR)/bin/activate: 
@@ -22,7 +22,7 @@ install: install-wheel
 
 # Build the Python wheel
 build-wheel: $(VENV_DIR)/bin/activate
-	cd DockerHelperPackage && ../$(VENV_DIR)/bin/python setup.py bdist_wheel 
+	cd Backend && ../$(VENV_DIR)/bin/python setup.py bdist_wheel 
 	cd ..
 	@echo "Wheel built and available in $(DIST_DIR)/."
 

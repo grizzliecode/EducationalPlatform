@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 import subprocess
 import time
-from DockerHelperPackage.DockerHelper import DockerHelper, DockerHelperException
+from DockerHelper import DockerHelper, DockerHelperException
 
 input_file = "./tests/resources/input.txt"
 output_file = "./tests/resources/output.txt"
