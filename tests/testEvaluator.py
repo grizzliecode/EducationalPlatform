@@ -31,6 +31,20 @@ class TestEvaluator(TestCase):
             dh.coppyToContainer(containerId=containerID,data_string=fin.read(),container_path="/work", file_name="test.cpp") 
         dh.execCommand(containerId=containerID, command=CMD)
         time.sleep(2)
+        start_time = time.time()
+        file_found = False
+        while time.time() - start_time < 5:
+            try:
+                result = dh.execCommand(containerId=containerID, command=["test", "-f","/work/clues.txt"])
+                # Check the exit code (0 means the file exists)
+                if result == 0:
+                    file_found = True
+                    break
+            except DockerHelperException:
+                pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        self.assertTrue(file_found)
         output = dh.coppyFromContainer(containerId=containerID,container_path="/work/clues.txt")  
         self.assertEqual("Accepted", output)
         dh.stopContainer(containerID, True)
@@ -52,6 +66,20 @@ class TestEvaluator(TestCase):
             dh.coppyToContainer(containerId=containerID,data_string=fin.read(),container_path="/work", file_name="test.cpp") 
         dh.execCommand(containerId=containerID, command=CMD)
         time.sleep(2)
+        file_found = False
+        start_time = time.time()
+        while time.time() - start_time < 5:
+            try:
+                result = dh.execCommand(containerId=containerID, command=["test", "-f","/work/clues.txt"])
+                # Check the exit code (0 means the file exists)
+                if result == 0:
+                    file_found = True
+                    break
+            except DockerHelperException:
+                pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        self.assertTrue(file_found)
         output = dh.coppyFromContainer(containerId=containerID,container_path="/work/clues.txt")  
         self.assertTrue("Runtime exception." in output)
         dh.stopContainer(containerID, True)
@@ -73,6 +101,20 @@ class TestEvaluator(TestCase):
             dh.coppyToContainer(containerId=containerID,data_string=fin.read(),container_path="/work", file_name="CumulativeSum.java") 
         dh.execCommand(containerId=containerID, command=CMD)
         time.sleep(2)
+        file_found = False
+        start_time = time.time()
+        while time.time() - start_time < 5:
+            try:
+                result = dh.execCommand(containerId=containerID, command=["test", "-f","/work/clues.txt"])
+                # Check the exit code (0 means the file exists)
+                if result == 0:
+                    file_found = True
+                    break
+            except DockerHelperException:
+                pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        self.assertTrue(file_found)
         output = dh.coppyFromContainer(containerId=containerID,container_path="/work/clues.txt")  
         self.assertEqual("Accepted", output)
         dh.stopContainer(containerID, True)
@@ -94,6 +136,20 @@ class TestEvaluator(TestCase):
             dh.coppyToContainer(containerId=containerID,data_string=fin.read(),container_path="/work", file_name="test.py") 
         dh.execCommand(containerId=containerID, command=CMD)
         time.sleep(2)
+        file_found = False
+        start_time = time.time()
+        while time.time() - start_time < 5:
+            try:
+                result = dh.execCommand(containerId=containerID, command=["test", "-f","/work/clues.txt"])
+                # Check the exit code (0 means the file exists)
+                if result == 0:
+                    file_found = True
+                    break
+            except DockerHelperException:
+                pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        self.assertTrue(file_found)
         output = dh.coppyFromContainer(containerId=containerID,container_path="/work/clues.txt")  
         self.assertEqual("Accepted", output)
         dh.stopContainer(containerID, True)
