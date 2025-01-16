@@ -1,77 +1,72 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      // Format the request body
-      const data = new URLSearchParams();
-      data.append('grant_type', 'password');
-      data.append('username', email); // Username from the form
-      data.append('password', password); // Password from the form
-      data.append('scope', '');
-      data.append('client_id', 'string'); // Fixed value based on the API
-      data.append('client_secret', 'string'); // Fixed value based on the API
+      const response = await axios.post(
+        'http://127.0.0.1:8000/login',
+        new URLSearchParams({
+          grant_type: 'password',
+          username: email,
+          password: password,
+          client_id: 'string', // Replace with actual client ID if needed
+          client_secret: 'string', // Replace with actual client secret if needed
+        }),
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      );
 
-      // Make the POST request
-      const response = await axios.post('http://127.0.0.1:8000/login', data, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Accept: 'application/json',
-        },
-      });
-
-      const token = response.data.access_token; // Assuming the token is in `access_token`
-      localStorage.setItem('token', token); // Store the JWT token
-      navigate('/home'); // Redirect to home page
-    } catch (err: any) {
-      console.error(err);
-      setError('Login failed. Please check your credentials and try again.');
+      const token = response.data.access_token;
+      localStorage.setItem('token', token);
+      localStorage.setItem('email', email);
+      navigate('/home');
+    } catch (error) {
+      setErrorMessage('Invalid credentials');
     }
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-4">
-          <h2 className="text-center">Login</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group mb-3">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                className="form-control"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group mb-3">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                className="form-control"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <button type="submit" className="btn btn-primary w-100">Login</button>
-          </form>
+    <div className="login-container">
+      <h2>Login</h2>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      <form onSubmit={handleLogin}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-      </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
+      </form>
+      <p>
+        Don't have an account? <a href="/signup">Sign up</a>
+      </p>
     </div>
   );
 };

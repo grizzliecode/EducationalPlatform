@@ -1,0 +1,145 @@
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, blue, red);
+  padding: 10px 20px;
+  position: fixed; /* Fix navbar at the top */
+  top: 0;
+  left: 0;
+  right: 0; /* Ensure navbar spans the full width */
+  z-index: 1000; /* Ensures navbar is on top of other content */
+  width: 100vw; /* Ensure the navbar spans the entire viewport width */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-button.active {
+  font-weight: bold;
+}
+
+/* Content Styling */
+.content {
+  margin-top: 80px; /* Adds space for the fixed navbar */
+  padding: 20px; /* Adds padding to the content */
+}
+
+/* Create Class and Manage Users / Classrooms Styling */
+.create-class-form,
+.manage-users,
+.manage-classrooms {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.create-class-form h3,
+.manage-users h3,
+.manage-classrooms h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 16px;
+}
+
+.form-control,
+.teacher-search-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.teacher-search-results {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+/* Manage Users and Classrooms Styling */
+.manage-users .user-list,
+.manage-classrooms .classroom-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-item,
+.classroom-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff6b3; /* Light yellow background */
+  border: 1px solid #ddd;
+  padding: 15px; /* Added more padding for better spacing */
+  margin-bottom: 10px;
+  border-radius: 4px;
+  width: 100%; /* Ensures the item stretches across the full width */
+  max-width: 100%; /* Makes sure it doesn't exceed full width */
+  box-sizing: border-box;
+}
+
+.user-item p,
+.classroom-item p {
+  margin: 0;
+  width: 60%; /* Increased width for text */
+}
+
+.user-item button,
+.classroom-item button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-item button:hover,
+.classroom-item button:hover {
+  background-color: #c0392b;
+}
+
+/* Make sure the navbar and its buttons are responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-button {
+    margin-bottom: 10px;
+  }
+}
